@@ -9,8 +9,8 @@
 #include"input_proc.cpp"
 
 
-class check_file_text;
-class debug;
-class draw;
-class input;
+//class check_file_text;
+//class debug;
+//class draw;
+//class input;
 

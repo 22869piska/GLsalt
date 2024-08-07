@@ -1,19 +1,18 @@
 
-
 #version 330 core
 out vec4 FragColor;
+  
+in vec3 ourColor;
+in vec2 TexCoord;
 
-
-  in vec3 ourColor;
-//in vec4 vertexColor; // the input variable from the vertex shader (same name and same type)  
-
-
-
-
-
+uniform vec4 scolor;
+uniform sampler2D texture1;
+uniform sampler2D texture2;
 
 void main()
 {
-    
-    FragColor = vec4(ourColor,1.0);
-} 
+   
+  //  FragColor = texture(texture1, TexCoord);
+    FragColor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord)*scolor, 0.4);
+
+}

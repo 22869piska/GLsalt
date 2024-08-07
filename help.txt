@@ -1,94 +1,38 @@
-//    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
-//    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+Почему наш контейнер теперь вращается вокруг экрана?:
+== ============================================= ===
+Помните, что умножение матриц применяется в обратном порядке. На этот раз перевод такой
+сначала применяется к контейнеру, располагая его в правом нижнем углу экрана.
+После перевода к переведенному контейнеру применяется вращение.
 
+Преобразование вращения также известно как преобразование смены базиса.
+когда мы копнем немного глубже в линейную алгебру. Поскольку мы меняем
+основе контейнера, следующие результирующие трансляции будут переводить контейнер
+на основе новых базисных векторов. Как только вектор слегка повернется, вертикальная
+например, переводы также будут немного переведены.
 
-vecn: вектор nчисел с плавающей точкой по умолчанию.
-bvecn: вектор nбулевых значений.
-ivecn: вектор nцелых чисел.
-uvecn: вектор nбеззнаковых целых чисел.
-dvecn: вектор nдвойных компонент.
+Если бы мы сначала применили повороты, они бы разрешились вокруг начала вращения (0,0,0), но 
+поскольку контейнер сначала перемещается, его начало вращения больше не (0,0,0), что делает его
+выглядит так, как будто он кружит вокруг начала сцены.
 
+Если у вас возникли проблемы с визуализацией или пониманием этого, не волнуйтесь. Если вы
+поэкспериментируйте с трансформациями, и вы скоро все поймете; все, что нужно
+это практика и опыт.
+Почему наш контейнер теперь вращается вокруг экрана?:
+== =============================================
+Помните, что умножение матриц применяется в обратном порядке. На этот раз перевод такой
+сначала применяется к контейнеру, располагая его в правом нижнем углу экрана.
+После перевода к переведенному контейнеру применяется вращение.
 
-const char* vertexShaderSource = "#version 330 core\n"
-"layout (location = 0) in vec3 aPos;\n"
-"void main()\n"
-"{\n"
-"   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
-"}\0";
+Преобразование вращений также известно как преобразование смены базиса.
+когда мой копнем немного глубже в линейную алгебру. Поскольку мы меняем
+основу контейнера, следующие результативные трансляции будут переводить контейнеры
+на основе новых базисных векторов. Как только вектор легко повернется, вертикальная
+например, переводы также будут небольшого перевода.
 
+Если бы я сначала применили повороты, они бы разрешились вокруг начала вращения (0,0,0), нет
+Поскольку контейнер сначала перемещается, его начало вращений больше не (0,0,0), что делает его
+выглядит так, как будто он кружит вокруг начала сцены.
 
-const char* fragmentShaderSource = "#version 330 core\n"
-"out vec4 FragColor; \n"
-"\n"
-"void main()\n"
-"{\n"
-"	FragColor = vec4(1.0f, 1.0f, 0.2f, 1.0f); \n"
-"}\0";
-//
-
- //->nxt->
-
-
-
-
-
-
- //shader//
-
- /*
- unsigned int vertexshader;
- vertexshader = glCreateShader(GL_VERTEX_SHADER);
- glShaderSource(vertexshader, 1, &vertexShaderSource, 0);
- glCompileShader(vertexshader);
-
- //checkbug
- int  _truecompile;
- char infoLog[512];
- glGetShaderiv(vertexshader, GL_COMPILE_STATUS, &_truecompile);
-
- if (!_truecompile)
- {
-	 glGetShaderInfoLog(vertexshader, 512, NULL, infoLog);
-	 std::cout << "	VERTEX_SHADER_COMPILE_PIZDEC\n" << infoLog << std::endl;
- }
-
-
-
- //frag
- //newtest
-
-
- //end
-
- 
-
- unsigned int fragmentShader;
- fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
- glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
- glCompileShader(fragmentShader);
-
-
- unsigned int shaderprogram;
- shaderprogram = glCreateProgram();
-
- glAttachShader(shaderprogram, vertexshader);
- glAttachShader(shaderprogram, fragmentShader);
- glLinkProgram(shaderprogram);
-
- glGetProgramiv(shaderprogram, GL_LINK_STATUS, &_truecompile);
- if (!_truecompile) {
-	 glGetProgramInfoLog(shaderprogram, 512, NULL, infoLog);
-	 std::cout << "	program__compile_PIZDEC\n" << infoLog << std::endl;
- }
- glUseProgram(shaderprogram);
-
-
- glDeleteShader(vertexshader);
- glDeleteShader(fragmentShader);
-
- */
-
-
- 	0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,    // bottom right
-	   -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,    // bottom left
-		0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f, //top
+Если у вас возникли проблемы с визуализацией или пониманием этого, не волнуйтесь. Если вы
+Поэкспериментируйте с трансформациями, и вы скоро все поймете; все, что нужно
+это практика и опыт.

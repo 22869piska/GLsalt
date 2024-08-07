@@ -72,11 +72,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)\lib\inc;$(SolutionDir)\lib\kakshki;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\lib\inc;$(SolutionDir)\lib\kakshki;$(SolutionDir)\lib\inc\glm;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\lib\kakshki;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)\lib\inc;$(SolutionDir)\lib\kakshki;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\lib\inc;$(SolutionDir)\lib\kakshki;$(SolutionDir)\lib\inc\glm;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\lib\kakshki;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -157,9 +157,14 @@
     <ClInclude Include="other.cpp" />
     <ClInclude Include="other.hpp" />
     <ClInclude Include="penis.hpp" />
+    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="help.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\container.png" />
+    <Image Include="res\wall.jpg" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -11,9 +11,13 @@
 #include<iostream>
 #include"penis.hpp"
 
+
+
+
+
 class  input {
 public:
-	
+
 
 	void key_check_esc(GLFWwindow* window)
 	{
@@ -38,22 +42,10 @@ public:
 	
 	}
 
-	void key_vertex_move(GLFWwindow * window)
-	{
-		
-		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		{
+	
+	
 
-
-
-
-			shader.setfloat("movex", fl += 0.01);
-			std::cout << fl;
-		}
-
-
-		shader.setfloat("movey", 0.1f);
-	}
+	
 
 
 
@@ -62,6 +54,6 @@ public:
 
 
 private:
-	check_file_text shader;
+	
 	float fl = 0.1;
 };

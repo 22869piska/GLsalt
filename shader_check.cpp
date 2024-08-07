@@ -4,19 +4,26 @@
 #endif
 
 #include <glad/glad.h>
-
+#include<GLFW/glfw3.h>
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <iostream>
 
+#include <glm/glm.hpp>
 
+
+using namespace std;
 class check_file_text {
 public:
+
+  
+
+     unsigned int ID;
 	check_file_text(){}
 	//
-    unsigned int ID;
-    // constructor generates the shader on the fly
+   
+    // constructor generate shader
     // ------------------------------------------------------------------------
     check_file_text(const char* vertexPath, const char* fragmentPath)
     {
@@ -94,29 +101,94 @@ public:
     {
         glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
     }
-    void check_errors()
+    void setfloat4(const std::string& name, float value1, float value2, float value3, float value4) const
     {
-    //posmotrim
+        glUniform4f(glGetUniformLocation(ID, name.c_str()), value1, value2, value3, value4);
+    }
+    void setVec2(const std::string& name, const glm::vec2& value) const
+    {
+        glUniform2fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+    }
+    void setVec2(const std::string& name, float x, float y) const
+    {
+        glUniform2f(glGetUniformLocation(ID, name.c_str()), x, y);
+    }
+    // ------------------------------------------------------------------------
+    void setVec3(const std::string& name, const glm::vec3& value) const
+    {
+        glUniform3fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+    }
+    void setVec3(const std::string& name, float x, float y, float z) const
+    {
+        glUniform3f(glGetUniformLocation(ID, name.c_str()), x, y, z);
+    }
+    // ------------------------------------------------------------------------
+    void setVec4(const std::string& name, const glm::vec4& value) const
+    {
+        glUniform4fv(glGetUniformLocation(ID, name.c_str()), 1, &value[0]);
+    }
+    void setVec4(const std::string& name, float x, float y, float z, float w) const
+    {
+        glUniform4f(glGetUniformLocation(ID, name.c_str()), x, y, z, w);
+    }
+    // ------------------------------------------------------------------------
+    void setMat2(const std::string& name, const glm::mat2& mat) const
+    {
+        glUniformMatrix2fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+    }
+    // ------------------------------------------------------------------------
+    void setMat3(const std::string& name, const glm::mat3& mat) const
+    {
+        glUniformMatrix3fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+    }
+    // ------------------------------------------------------------------------
+    void setMat4(const std::string& name, const glm::mat4& mat) const
+    {
+        glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
+    }
+
+    /// 
+    
+  
+    void set_RGB(GLFWwindow* window)
+    {
+        if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+        {
+            r += 0.1f;
+            setfloat4("scolor",r,g,b,alpha );  cout << "R" << r;
+          
+        }
+        if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
+        {
+            g += 0.1f;
+            setfloat4("scolor", r, g, b, alpha);   cout << "G" << g;
+        } 
+        if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS)
+        {
+            b += 0.1f;
+            setfloat4("scolor", r, g, b, alpha);   cout << "B" << b;
+        }
+        if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS)
+        {
+            r = 0.1, g = 0.1, b = 0.1; alpha = 1;
+            setfloat4("scolor", r, g, b, alpha);   cout << "ALPHA" << alpha;
+        }
       
     }
 
 /// /////////////////test/////////////////////////////////////////->
 
  //   /*
+    float fl = 0.1;
+    float r=0.5, g=0.5, b=0.5;
+    float alpha = 1.0;
+    float size = 1.0;
 
-  
-    void test_draw()
-    {
-      
-
-
-
-    }
  //   */
 
 
 private:
-    // utility function for checking shader compilation/linking errors.
+    
     // ------------------------------------------------------------------------
     void checkCompileErrors(unsigned int shader, std::string type)
     {
@@ -145,16 +217,6 @@ private:
 
 
 
-
-
-
-
-
 private:
 };
-
-
-
-
-
 
