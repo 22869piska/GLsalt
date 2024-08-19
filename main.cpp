@@ -31,7 +31,8 @@ void resize_window(GLFWwindow* window, int width, int height)
 	cout << width << "_" << height << endl;
 }
 
-
+int w = 1600;
+ int h = 960;
 
 int main(void)
 {
@@ -44,7 +45,7 @@ int main(void)
 	//draw draw_;
 	//logic logic_;
 	CALL_PROC call_proc;
-
+	
 
 	////////////////////////////class
 	//govno_.start_();
@@ -54,7 +55,7 @@ int main(void)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	GLFWwindow* window = glfwCreateWindow(1600, 960, "SOLEVOY228", 0, 0); if (window == 0) { return-1111; }
+	GLFWwindow* window = glfwCreateWindow(w, h, "SOLEVOY228", 0, 0); if (window == 0) { return-1111; }
 	glfwMakeContextCurrent(window);
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -64,7 +65,7 @@ int main(void)
 	
 	check_file_text shader("vertex.shader","fragment.shader");/////////////////////////////////shader compile;
 
-	glViewport(0, 0, 1280, 840);//render porno gde//
+	glViewport(0, 0, w, h);//render porno gde//
 
 	glfwSetFramebufferSizeCallback(window, resize_window);
 	//gl_gr
@@ -166,46 +167,73 @@ int main(void)
  
  // --
  ///////////////////////////////////////////////////////////END//////////////////////////////////////////////////////////////////
- float fl = 0.1;
+ GLFW_OPENGL_DEBUG_CONTEXT;
+glEnable(GL_DEPTH_TEST);
+glEnable(GL_DEPTH);
+
+double cpos1, cpos2;
+glfwGetCursorPos(window, &cpos1, &cpos2);
+cout << "1psrsr==>" << cpos1 << "2pscrsr==>" << cpos2 << endl;
+//kallovvayuamassa//
+
+//;/ int skok = 1;
+//glm::vec3* boxpos = new glm::vec3[skok];
+
+
+
+//end
  cout << "-----------------whilestart-----------------" << endl;
 ////while next->////--------------------------------------------------------while________-----___-__--------____-_-_--------_____---
 	while (!glfwWindowShouldClose(window))
 	{
-	
+		//masiv
+		
+		//call_proc.box_arr(&boxpos,&skok);
+		//call_proc.box_setpos(&boxpos,&skok);
+
+
+
+		///end masiv
+		
 		///next->input_
-		input_.key_check_esc(window);
+		input_.key_check_esc(window);//exit
 		input_.key_polygon_off_on(window);
 		shader.set_RGB(window);
 
-
-
-
-		// create
-		shader.use();
-		call_proc.matlogc(shader.ID);
-	
-
 		
-
+		
 		/////////render cmd->
-		
+
 		glBindTexture(GL_TEXTURE_2D, texture1);
-		
-		call_proc.draw_color(other_obj_.x,other_obj_.y,other_obj_.z);
+
+		call_proc.draw_color(other_obj_.x, other_obj_.y, other_obj_.z);
 
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
-
-
-		
-	
 		glBindVertexArray(VAO);
 
-		//draw_.draw_3angl();
-		call_proc.draw_elements();
+	
+	
+		// create
+		shader.use();
 
+	
+
+		
+		//
+		
+
+		call_proc.matlogc(shader.ID,w,h,window);
+		
+
+
+
+		//call_proc.draw_3angl();
+		//call_proc.draw_elements();
+
+	
 		//////////////////////
 		glfwSwapInterval(60);
 		glfwSwapBuffers(window);
@@ -218,9 +246,10 @@ int main(void)
 	glDeleteBuffers(1, &VBO);
 	glDeleteBuffers(1, &EBO);
 
-
-
 	glfwDestroyWindow(window);
 	glfwTerminate();
+
+	call_proc.delete_array();
+	//delete[] boxpos;
 }
 

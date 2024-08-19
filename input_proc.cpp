@@ -17,6 +17,9 @@
 
 class  input {
 public:
+	float radians = 15.0f;
+	float radians_tex = 0.0f;
+	float cumera_speed = 1.2f * (float)glfwGetTime();
 
 
 	void key_check_esc(GLFWwindow* window)

@@ -1,7 +1,7 @@
 
 #ifndef SHADER_H
 #define SHADER_H
-#endif
+
 
 #include <glad/glad.h>
 #include<GLFW/glfw3.h>
@@ -16,9 +16,6 @@
 using namespace std;
 class check_file_text {
 public:
-
-  
-
      unsigned int ID;
 	check_file_text(){}
 	//
@@ -220,3 +217,4 @@ private:
 private:
 };
 
+#endif
