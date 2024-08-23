@@ -14,8 +14,13 @@ public:
 		glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
 		std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
 	}
-
-
+	void camera_pos(float x,float y,float z)
+	{
+		std::cout << "(x=" << x<<")";
+		std::cout << "(y=" << y << ")";
+		std::cout << "(z=" <<z << ")";
+		std::cout << std::endl;
+	}
 
 
 private:

@@ -9,6 +9,8 @@ uniform vec4 scolor;
 uniform sampler2D texture1;
 uniform sampler2D texture2;
 
+//uniform vec4 color;
+
 void main()
 {
    

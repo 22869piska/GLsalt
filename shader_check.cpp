@@ -149,18 +149,18 @@ public:
   
     void set_RGB(GLFWwindow* window)
     {
-        if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS)
+        if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)
         {
             r += 0.1f;
             setfloat4("scolor",r,g,b,alpha );  cout << "R" << r;
           
         }
-        if (glfwGetKey(window, GLFW_KEY_G) == GLFW_PRESS)
+        if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS)
         {
             g += 0.1f;
             setfloat4("scolor", r, g, b, alpha);   cout << "G" << g;
         } 
-        if (glfwGetKey(window, GLFW_KEY_B) == GLFW_PRESS)
+        if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS)
         {
             b += 0.1f;
             setfloat4("scolor", r, g, b, alpha);   cout << "B" << b;

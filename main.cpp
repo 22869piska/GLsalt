@@ -15,6 +15,7 @@
 #include<iostream>
 #include <string> 
 #include <fstream> 
+#include<ctime>
 //
 
 /// /// user inc
@@ -25,36 +26,50 @@
 using namespace std;
 ////////////////////////
 
+
+bool firstmovmouse = true;
+int w = 1600;
+int h = 960;
+
+float lastX = w/2;
+float lastY = h/2;
+
+float radik;
+float yaw;
+float pitch;
+
+input input_;
+debug debug_;
+other_obj other_obj_;
+//draw draw_;
+//logic logic_;
+CALL_PROC call_proc;
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+
 void resize_window(GLFWwindow* window, int width, int height)
 {
 	glViewport(0, 0, width, height);
 	cout << width << "_" << height << endl;
 }
 
-int w = 1600;
- int h = 960;
 
 int main(void)
 {
-
+	srand(time(NULL));
+	setlocale(LC_ALL, "Rus");
 	
 	/////////////////////////////class-init--------------------------------------------------------------------------
-	input input_;
-	debug debug_;
-	other_obj other_obj_;
-	//draw draw_;
-	//logic logic_;
-	CALL_PROC call_proc;
+	
 	
 
 	////////////////////////////class
 	//govno_.start_();
-	if (glfwInit() != true) { return-1111; };
-
+	
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
+	if (glfwInit() != true) { return-1111; };
 	GLFWwindow* window = glfwCreateWindow(w, h, "SOLEVOY228", 0, 0); if (window == 0) { return-1111; }
 	glfwMakeContextCurrent(window);
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -70,8 +85,6 @@ int main(void)
 	glfwSetFramebufferSizeCallback(window, resize_window);
 	//gl_gr
 	////////////////////////////////shdergenbin///////////////////////////////////////////
-
-
 
  //vao_crft_//->VAO
  unsigned int VBO, VAO, EBO;
@@ -175,10 +188,7 @@ double cpos1, cpos2;
 glfwGetCursorPos(window, &cpos1, &cpos2);
 cout << "1psrsr==>" << cpos1 << "2pscrsr==>" << cpos2 << endl;
 //kallovvayuamassa//
-
-//;/ int skok = 1;
-//glm::vec3* boxpos = new glm::vec3[skok];
-
+glfwSetInputMode(window,GLFW_CURSOR ,GLFW_CURSOR_DISABLED);
 
 
 //end
@@ -186,61 +196,41 @@ cout << "1psrsr==>" << cpos1 << "2pscrsr==>" << cpos2 << endl;
 ////while next->////--------------------------------------------------------while________-----___-__--------____-_-_--------_____---
 	while (!glfwWindowShouldClose(window))
 	{
-		//masiv
-		
-		//call_proc.box_arr(&boxpos,&skok);
-		//call_proc.box_setpos(&boxpos,&skok);
-
-
-
-		///end masiv
 		
 		///next->input_
+		glfwSetCursorPosCallback(window, mouse_callback);
+		
+		input_.mov_updown(window);
 		input_.key_check_esc(window);//exit
 		input_.key_polygon_off_on(window);
 		shader.set_RGB(window);
 
 		
-		
 		/////////render cmd->
 
 		glBindTexture(GL_TEXTURE_2D, texture1);
-
 		call_proc.draw_color(other_obj_.x, other_obj_.y, other_obj_.z);
-
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
 		glBindVertexArray(VAO);
 
-	
-	
-		// create
+			// create
 		shader.use();
 
-	
-
+		call_proc.matlogc(shader.ID,w,h,window,input_.cameraPosY);
 		
-		//
-		
-
-		call_proc.matlogc(shader.ID,w,h,window);
-		
-
-
-
-		//call_proc.draw_3angl();
-		//call_proc.draw_elements();
-
+		//debug_.camera_pos(call_proc.cameraPos.x, call_proc.cameraPos.y, call_proc.cameraPos.z);
 	
 		//////////////////////
 		glfwSwapInterval(60);
 		glfwSwapBuffers(window);
+		//glfwWaitEvents();
 		glfwPollEvents();
 
 		///////////////////////
-	}
+	}//end while
 
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteBuffers(1, &VBO);
@@ -249,7 +239,49 @@ cout << "1psrsr==>" << cpos1 << "2pscrsr==>" << cpos2 << endl;
 	glfwDestroyWindow(window);
 	glfwTerminate();
 
-	call_proc.delete_array();
-	//delete[] boxpos;
+	//call_proc.delete_array();
+	////delete[] boxpos;
 }
 
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	if (firstmovmouse)
+	{
+		lastX = xpos;
+		lastY = ypos;
+		firstmovmouse = false;
+	}
+	float xoffset = xpos -lastX;//0
+	float yoffset = lastY -ypos;//0
+	lastX = xpos;
+	lastY = ypos;
+
+	 float sensitivity = 0.1f;
+	xoffset *= sensitivity;
+	yoffset *= sensitivity;
+
+	yaw += xoffset;
+	pitch += yoffset;
+
+
+	if (pitch > 89.0f)
+		pitch = 89.0f;
+	if (pitch < -89.0f)
+		pitch = -89.0f;
+
+	glm::vec3 direction;
+	direction.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	direction.y = sin(glm::radians(pitch));
+	direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	
+	 call_proc.cameraFront = glm::normalize(direction);
+	 call_proc.direction = direction;
+	/*cout << "direction.x=" << call_proc.direction.x;
+	cout << "direction.y=" << call_proc.direction.y;
+	cout << "direction.z=" << call_proc.direction.z;
+	std::cout << xoffset << "-" << yoffset << std::endl;
+	*/
+
+	
+
+}

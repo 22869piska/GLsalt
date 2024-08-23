@@ -17,8 +17,17 @@
 
 class  input {
 public:
+	 
+	float cameraPosY = 0.f;
+	float lastX = 820;
+	float lastY = 600;
+
+	float radik;
+	float yaw;
+	float pitch;
+
 	float radians = 15.0f;
-	float radians_tex = 0.0f;
+
 	float cumera_speed = 1.2f * (float)glfwGetTime();
 
 
@@ -33,7 +42,7 @@ public:
 
 	void key_polygon_off_on(GLFWwindow*window)
 	{
-		if (glfwGetKey(window, GLFW_KEY_P) ==GLFW_PRESS) {
+		if (glfwGetKey(window, GLFW_KEY_P) == GLFW_PRESS) {
 			glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 			std::cout << "POLYGON_MODE_TRUE" << std::endl;
 		}
@@ -44,19 +53,20 @@ public:
 		}
 	
 	}
-
-	
-	
-
-	
-
-
-
-
-
-
-
+	void mov_updown(GLFWwindow* window)
+	{
+		if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+		{
+			cameraPosY += 0.12f;
+		}
+		if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+		{
+			cameraPosY -= 0.12f;
+		}
+	}
 private:
 	
+
+
 	float fl = 0.1;
 };

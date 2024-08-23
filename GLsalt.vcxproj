@@ -153,6 +153,7 @@
     <None Include="x64\glfw3.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="camera.hpp" />
     <ClInclude Include="engine_proc.h" />
     <ClInclude Include="other.cpp" />
     <ClInclude Include="other.hpp" />
