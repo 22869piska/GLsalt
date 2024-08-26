@@ -9,7 +9,7 @@
 
 ///////next inc
 #include<iostream>
-#include"penis.hpp"
+#include"engine_work.h"
 
 
 
@@ -19,14 +19,9 @@ class  input {
 public:
 	 
 	float cameraPosY = 0.f;
-	float lastX = 820;
-	float lastY = 600;
+	
 
-	float radik;
-	float yaw;
-	float pitch;
-
-	float radians = 15.0f;
+	//float radians = 15.0f;
 
 	float cumera_speed = 1.2f * (float)glfwGetTime();
 
@@ -66,7 +61,5 @@ public:
 	}
 private:
 	
-
-
 	float fl = 0.1;
 };

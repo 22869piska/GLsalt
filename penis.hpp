@@ -1,3 +1,24 @@
 #pragma once
-//#include"shader_check.cpp"
-//class file_check_text;
+
+#ifndef pozornik
+#define pozornik
+
+
+//#include"engine_work.cpp"
+
+
+
+
+
+
+
+
+
+#endif 
+
+
+
+
+
+
+

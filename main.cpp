@@ -1,10 +1,5 @@
 
 
-
-
-
-
-
 ////
 #include <glad/glad.h>
 #include<GLFW/glfw3.h>
@@ -18,18 +13,20 @@
 #include<ctime>
 //
 
-/// /// user inc
-//#include "input_proc.hpp"
+
+#include"camera.hpp"
+
 #include "other.hpp"
 #include"engine_proc.h"
-//#include"stb_image.h"
+#include"engine_work.h"
+
 using namespace std;
 ////////////////////////
 
-
-bool firstmovmouse = true;
 int w = 1600;
 int h = 960;
+bool firstmovmouse_ = true;
+
 
 float lastX = w/2;
 float lastY = h/2;
@@ -43,9 +40,12 @@ debug debug_;
 other_obj other_obj_;
 //draw draw_;
 //logic logic_;
-CALL_PROC call_proc;
+ CALL_PROC call_proc;
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos);
+ camera cam;
+
+ 
+ void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 
 void resize_window(GLFWwindow* window, int width, int height)
 {
@@ -60,6 +60,7 @@ int main(void)
 	setlocale(LC_ALL, "Rus");
 	
 	/////////////////////////////class-init--------------------------------------------------------------------------
+
 	
 	
 
@@ -85,7 +86,7 @@ int main(void)
 	glfwSetFramebufferSizeCallback(window, resize_window);
 	//gl_gr
 	////////////////////////////////shdergenbin///////////////////////////////////////////
-
+	
  //vao_crft_//->VAO
  unsigned int VBO, VAO, EBO;
  glGenVertexArrays(1, &VAO);
@@ -199,7 +200,8 @@ glfwSetInputMode(window,GLFW_CURSOR ,GLFW_CURSOR_DISABLED);
 		
 		///next->input_
 		glfwSetCursorPosCallback(window, mouse_callback);
-		
+		//cum.cameralogic_fly(window, call_proc);
+
 		input_.mov_updown(window);
 		input_.key_check_esc(window);//exit
 		input_.key_polygon_off_on(window);
@@ -207,7 +209,6 @@ glfwSetInputMode(window,GLFW_CURSOR ,GLFW_CURSOR_DISABLED);
 
 		
 		/////////render cmd->
-
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		call_proc.draw_color(other_obj_.x, other_obj_.y, other_obj_.z);
 		glActiveTexture(GL_TEXTURE0);
@@ -215,14 +216,11 @@ glfwSetInputMode(window,GLFW_CURSOR ,GLFW_CURSOR_DISABLED);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
 		glBindVertexArray(VAO);
-
 			// create
 		shader.use();
 
 		call_proc.matlogc(shader.ID,w,h,window,input_.cameraPosY);
-		
 		//debug_.camera_pos(call_proc.cameraPos.x, call_proc.cameraPos.y, call_proc.cameraPos.z);
-	
 		//////////////////////
 		glfwSwapInterval(60);
 		glfwSwapBuffers(window);
@@ -237,13 +235,10 @@ glfwSetInputMode(window,GLFW_CURSOR ,GLFW_CURSOR_DISABLED);
 	glDeleteBuffers(1, &EBO);
 
 	glfwDestroyWindow(window);
-	glfwTerminate();
-
-	//call_proc.delete_array();
-	////delete[] boxpos;
+	glfwTerminate();	
 }
 
-void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+/*void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 {
 	if (firstmovmouse)
 	{
@@ -280,8 +275,16 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	cout << "direction.y=" << call_proc.direction.y;
 	cout << "direction.z=" << call_proc.direction.z;
 	std::cout << xoffset << "-" << yoffset << std::endl;
-	*/
+	*
 
 	
 
+}*/
+void mouse_callback(GLFWwindow* window, double xposin, double yposin)
+{
+	cam._mouse_callback_(window,xposin,yposin,&call_proc );
+	
 }
+
+
+
