@@ -9,22 +9,24 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
-
 #include <glm/glm.hpp>
+
 
 
 using namespace std;
 class check_file_text {
+
 public:
-     unsigned int ID;
-	check_file_text(){}
-	//
-   
-    // constructor generate shader
+   unsigned int ZVO;
+        unsigned int ID;
     // ------------------------------------------------------------------------
+    check_file_text()
+    {
+
+    }
     check_file_text(const char* vertexPath, const char* fragmentPath)
     {
-        // 1. retrieve the vertex/fragment source code from filePath
+       
         std::string vertexCode;
         std::string fragmentCode;
         std::ifstream vShaderFile;
@@ -34,17 +36,13 @@ public:
         fShaderFile.exceptions(std::ifstream::failbit | std::ifstream::badbit);
         try
         {
-            // open files
             vShaderFile.open(vertexPath);
             fShaderFile.open(fragmentPath);
             std::stringstream vShaderStream, fShaderStream;
-            // read file's buffer contents into streams
             vShaderStream << vShaderFile.rdbuf();
-            fShaderStream << fShaderFile.rdbuf();
-            // close file handlers
+            fShaderStream << fShaderFile.rdbuf();     
             vShaderFile.close();
-            fShaderFile.close();
-            // convert stream into string
+            fShaderFile.close(); 
             vertexCode = vShaderStream.str();
             fragmentCode = fShaderStream.str();
         }
@@ -54,35 +52,28 @@ public:
         }
         const char* vShaderCode = vertexCode.c_str();
         const char* fShaderCode = fragmentCode.c_str();
-        // 2. compile shaders
-        unsigned int vertex, fragment;
-        // vertex shader
+        unsigned int vertex, fragment;   
         vertex = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(vertex, 1, &vShaderCode, NULL);
         glCompileShader(vertex);
-        checkCompileErrors(vertex, "VERTEX");
-        // fragment Shader
+        checkCompileErrors(vertex, "VERTEX");     
         fragment = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(fragment, 1, &fShaderCode, NULL);
         glCompileShader(fragment);
-        checkCompileErrors(fragment, "FRAGMENT");
-        // shader Program
+        checkCompileErrors(fragment, "FRAGMENT");    
         ID = glCreateProgram();
         glAttachShader(ID, vertex);
         glAttachShader(ID, fragment);
         glLinkProgram(ID);
-        checkCompileErrors(ID, "PROGRAM");
-        // delete the shaders as they're linked into our program now and no longer necessary
+        checkCompileErrors(ID, "PROGRAM");       
         glDeleteShader(vertex);
         glDeleteShader(fragment);
     }
-    // activate the shader
-    // ------------------------------------------------------------------------
+ // ---------------------------------------------------------------
     void use()
     {
         glUseProgram(ID);
     }
-    // utility uniform functions
     // ------------------------------------------------------------------------
     void setbool(const std::string& name, bool value) const
     {
@@ -145,44 +136,20 @@ public:
     }
 
     /// 
-    
-  
-    void set_RGB(GLFWwindow* window)
+    unsigned int GET_id()
     {
-        if (glfwGetKey(window, GLFW_KEY_7) == GLFW_PRESS)
-        {
-            r += 0.1f;
-            setfloat4("scolor",r,g,b,alpha );  cout << "R" << r;
-          
-        }
-        if (glfwGetKey(window, GLFW_KEY_8) == GLFW_PRESS)
-        {
-            g += 0.1f;
-            setfloat4("scolor", r, g, b, alpha);   cout << "G" << g;
-        } 
-        if (glfwGetKey(window, GLFW_KEY_9) == GLFW_PRESS)
-        {
-            b += 0.1f;
-            setfloat4("scolor", r, g, b, alpha);   cout << "B" << b;
-        }
-        if (glfwGetKey(window, GLFW_KEY_0) == GLFW_PRESS)
-        {
-            r = 0.1, g = 0.1, b = 0.1; alpha = 1;
-            setfloat4("scolor", r, g, b, alpha);   cout << "ALPHA" << alpha;
-        }
-      
+        return ID;
     }
+     unsigned int pozorGL()
+   {
+        unsigned int id = ID;
 
-/// /////////////////test/////////////////////////////////////////->
-
- //   /*
-    float fl = 0.1;
-    float r=0.5, g=0.5, b=0.5;
-    float alpha = 1.0;
-    float size = 1.0;
-
- //   */
-
+#ifdef _DEBUG
+       std::cout << endl<<"pozor_gl\n";
+#endif 
+       return id;
+   }
+  
 
 private:
     
@@ -211,9 +178,6 @@ private:
         }
     }
 	
-
-
-
 private:
 };
 

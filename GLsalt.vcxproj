@@ -85,6 +85,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -99,6 +101,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -114,6 +118,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,6 +135,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,36 +146,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CUMERA.cpp" />
-    <ClCompile Include="debug.cpp" />
-    <ClCompile Include="engine_work.cpp" />
     <ClCompile Include="glad.c" />
-    <ClCompile Include="input_proc.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="shader_check.cpp" />
+    <ClCompile Include="main\MAIN.cpp" />
+    <ClCompile Include="main\shader_check.cpp" />
+    <ClCompile Include="main\texture.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fragment.shader" />
     <None Include="glfw3.dll" />
-    <None Include="packages.config" />
-    <None Include="vertex.shader" />
+    <None Include="main\shaders\fragment.shader" />
+    <None Include="main\shaders\vertex.shader" />
     <None Include="x64\glfw3.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="camera.hpp" />
-    <ClInclude Include="engine_proc.h" />
-    <ClInclude Include="engine_work.h" />
-    <ClInclude Include="other.cpp" />
-    <ClInclude Include="other.hpp" />
-    <ClInclude Include="penis.hpp" />
-    <ClInclude Include="stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="help.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\container.png" />
-    <Image Include="res\wall.jpg" />
+    <ClInclude Include="main\public.h" />
+    <ClInclude Include="main\shader.h" />
+    <ClInclude Include="main\texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
