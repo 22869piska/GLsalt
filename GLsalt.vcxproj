@@ -148,6 +148,7 @@
   <ItemGroup>
     <ClCompile Include="glad.c" />
     <ClCompile Include="main\MAIN.cpp" />
+    <ClCompile Include="main\pidr\mathlogc.cpp" />
     <ClCompile Include="main\shader_check.cpp" />
     <ClCompile Include="main\texture.cpp" />
   </ItemGroup>
@@ -161,6 +162,8 @@
     <Text Include="help.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="main\headers.h" />
+    <ClInclude Include="main\pidr\mathlogc.h" />
     <ClInclude Include="main\public.h" />
     <ClInclude Include="main\shader.h" />
     <ClInclude Include="main\texture.h" />

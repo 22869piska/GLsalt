@@ -10,12 +10,19 @@
 #include <string> 
 #include <fstream> 
 #include<ctime>
-/// user inc next
+
+
+/// user inc next-----------------------------------------------------
 #include"public.h"
 #include"shader.h"
 #include"texture.h"
-/// 
+#include"headers.h"
+//define--------------------------------------------------------------
 using namespace std;
+#define ret return
+#define end <<std::endl
+/// 
+
 int W_ = 1600; int H_ = 920;
 
 //----------------------------------------------------------------------------------------------------
@@ -24,7 +31,7 @@ int W_ = 1600; int H_ = 920;
 void resize(GLFWwindow* window, int width, int height);
 void windowinit__();
 void _in(GLFWwindow* window,check_file_text* shader);
-void _gl_pisos();
+void _gl_compile();
 
 //->--------------------------------------------------------------------------------------------------
 
@@ -33,7 +40,7 @@ void _gl_pisos();
 int main()
 {
 #ifdef _DEBUG
-    cout << "DEBUG_MYD_CLOWN\n";
+    cout << "DEBUG_MODE" end;
 #else
     std::cout << "RELEASE_\n";
 #endif 
@@ -41,19 +48,18 @@ int main()
     glfwSetFramebufferSizeCallback(window, resize);
    //
     check_file_text* shader=new check_file_text("main/shaders/vertex.shader", "main/shaders/fragment.shader");
-    _gl_pisos();
+    _gl_compile();
     texture *tex = new texture;
     
-
-
-
-    //
+   
+    //-------------------------------
     tex->id = shader->GET_id();
     shader->use();
     tex->ALL_TEXTURE();
    
-   //
+   //--------------------------------
    
+
     while (!glfwWindowShouldClose(window))
     {//unput->
         
@@ -87,7 +93,7 @@ int main()
 
     ///
     glfwTerminate();
-	return 0;
+	ret 0;
 }
 
 
@@ -143,7 +149,7 @@ void windowinit__()
     window = glfwCreateWindow(W_,H_, "SALT_BOY", NULL, NULL);
  if (window == 0) { glfwTerminate();  cout << "NETY_WINDOW_BLYA"; }
 #ifdef _DEBUG
-    cout <<"WINDOW=="<< window<<std::endl;
+    cout <<"WINDOW=="<< window end;
 #endif
   glfwMakeContextCurrent(window);
   if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -167,7 +173,7 @@ void resize(GLFWwindow* window, int width, int height)
 {
     glViewport(0, 0, width, height);
 }
-void _gl_pisos()
+void _gl_compile()
 {
     //
     glGenVertexArrays(1, &VAO);

@@ -1,7 +1,8 @@
-
+#define ret return
 #define STB_IMAGE_IMPLEMENTATION
 #include <GLFW/stb_image.h>
 #include"texture.h"
+#define end <<std::endl
 texture::~texture()
 {
    
@@ -104,7 +105,7 @@ void texture::texture_wall()
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
         glGenerateMipmap(GL_TEXTURE_2D);
-        std::cout  << "LOAD_TEXTURE_WALL" << std::endl;
+        std::cout  << "LOAD_TEXTURE_WALL" end;
     }
     else
     {

@@ -26,6 +26,9 @@
     <ClCompile Include="main\texture.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="main\pidr\mathlogc.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="glfw3.dll" />
@@ -42,5 +45,7 @@
     <ClInclude Include="main\shader.h" />
     <ClInclude Include="main\texture.h" />
     <ClInclude Include="main\public.h" />
+    <ClInclude Include="main\pidr\mathlogc.h" />
+    <ClInclude Include="main\headers.h" />
   </ItemGroup>
 </Project>
