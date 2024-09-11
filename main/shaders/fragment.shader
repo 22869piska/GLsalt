@@ -20,6 +20,6 @@ void main()
 {
    //testcolor = mix(texture(texture1, TexCoord), texture(texture2, TexCoord)*vec4(color,0.9f), 0.5f);
    
-   testcolor= texture(t_wall, TexCoord)*vec4(ourColor,1.0f);
+   testcolor= texture(t_wall, TexCoord);//*vec4(color,1.0f);
 
 }

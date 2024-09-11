@@ -26,7 +26,7 @@ using namespace std;
 int W_ = 1600; int H_ = 920;
 
 //----------------------------------------------------------------------------------------------------
-extern "C" bool _test_pidr(bool _skok);
+
 //----------------------------------------------------------------------------------------------------
 void resize(GLFWwindow* window, int width, int height);
 void windowinit__();
@@ -35,13 +35,14 @@ void _gl_compile();
 void _delete(); void __TEST__();
 //->--------------------------------------------------------------------------------------------------
 
-bool a =_test_pidr(false);
+
 
 //----------------------------------------------------------------------------------------------------
 int main()
 {
 #ifdef _DEBUG
     cout << "DEBUG_MODE" end;
+    bool a = _test_pidr(true);
 #else
     std::cout << "RELEASE_\n";
 #endif 
@@ -57,12 +58,16 @@ int main()
     tex->id = shader->GET_id();
     shader->use();
    // tex->ALL_TEXTURE();
-    tex->texture_billy_stronk();
+    tex->texture_1();
    
    //->
     glEnable(GL_DEPTH_TEST);
     
    //--------------------------------
+    glm::mat4 projection;
+    projection = glm::perspective(glm::radians(50.0f), 1600.f / 920.0f, 0.1f, 300.0f);
+    int projection_loc = glGetUniformLocation(shader->ID, "projection");
+    glUniformMatrix4fv(projection_loc, 1, GL_FALSE, glm::value_ptr(projection));
     __TEST__();
     while (!glfwWindowShouldClose(window))
     {//unput->
@@ -81,10 +86,19 @@ int main()
 
      
 
+        for (unsigned int i = 0; i < 10; i++)
+        {
+            glm::mat4 model = glm::mat4(1.0f);
+            model = glm::translate(model, cubePositions[i]);
+            float angle = 20.0f * i;
+            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+            shader->setMat4("model", model);
+
+            glDrawArrays(GL_TRIANGLES, 0, 36);
+        }
 
 
-
-        glDrawArrays(GL_TRIANGLES, 0, 36);
+       
          
 
         ///end//
@@ -200,24 +214,17 @@ void _gl_compile()
     //
 
     // position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    // color attribute
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-    glEnableVertexAttribArray(1);
     // texture coord attribute
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
-    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 
-
-   
     //
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     //
     glBindVertexArray(0);
     //
-
-
 
 }
 void __TEST__()

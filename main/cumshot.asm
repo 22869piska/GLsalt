@@ -1,15 +1,24 @@
 
+
+
+
+.data
+
+MB_OK    EQU 0
+;EXTERN MessageBoxA@16:NEAR
+
 .code
 
+;---------------------------------
 _test_pidr proc
 
-; bool _test_pidr(bool _skok)
-;RCX RDX R8 R9
+;PUSH     MB_OK
+;call     MessageBoxA@16
 
 mov rax,rcx
-ret 
-
+ret
 
 _test_pidr endp
 
 end
+;---------------------------------

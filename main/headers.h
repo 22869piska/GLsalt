@@ -1,15 +1,8 @@
 #pragma once
 #ifndef headers
 #define headers
-//#include <glad/glad.h>
-//#include<GLFW/glfw3.h>
-//
-//#include <glm/glm.hpp>
-//#include <glm/gtc/matrix_transform.hpp>
-//#include <glm/gtc/type_ptr.hpp>
-
-
-
+//extern->
+extern "C" bool _test_pidr(bool _skok);
 
 ///---------------------------------------------------------------------------------------------------------------------
 #include"pidr/camera.h"
