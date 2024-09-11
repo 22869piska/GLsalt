@@ -26,15 +26,16 @@ using namespace std;
 int W_ = 1600; int H_ = 920;
 
 //----------------------------------------------------------------------------------------------------
-
+extern "C" bool _test_pidr(bool _skok);
 //----------------------------------------------------------------------------------------------------
 void resize(GLFWwindow* window, int width, int height);
 void windowinit__();
 void _in(GLFWwindow* window,check_file_text* shader);
 void _gl_compile();
-
+void _delete(); void __TEST__();
 //->--------------------------------------------------------------------------------------------------
 
+bool a =_test_pidr(false);
 
 //----------------------------------------------------------------------------------------------------
 int main()
@@ -47,37 +48,44 @@ int main()
 	windowinit__();
     glfwSetFramebufferSizeCallback(window, resize);
    //
-    check_file_text* shader=new check_file_text("main/shaders/vertex.shader", "main/shaders/fragment.shader");
-    _gl_compile();
+    check_file_text* shader=new check_file_text("main/shaders/vertex.shader", "main/shaders/fragment.shader");  _gl_compile();
     texture *tex = new texture;
     
+    cout end <<"A=" << a end;
    
     //-------------------------------
     tex->id = shader->GET_id();
     shader->use();
-    tex->ALL_TEXTURE();
+   // tex->ALL_TEXTURE();
+    tex->texture_billy_stronk();
    
+   //->
+    glEnable(GL_DEPTH_TEST);
+    
    //--------------------------------
-   
-
+    __TEST__();
     while (!glfwWindowShouldClose(window))
     {//unput->
         
         _in(window,shader);
         //render->
-        
-        glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-
         shader->use();
-      
+        glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+       
+
+        camera::cam_fly(shader->ID);
+
         glBindVertexArray(VAO);
         tex->texture_bind();
 
      
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-         
 
+
+
+
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+         
 
         ///end//
         glfwSwapInterval(60);
@@ -88,11 +96,10 @@ int main()
     //
     delete shader;
     delete tex;
-
-
-
+    _delete();
     ///
     glfwTerminate();
+   
 	ret 0;
 }
 
@@ -100,7 +107,10 @@ int main()
 
 
 
-
+void _delete()
+{
+   
+}
 void _in(GLFWwindow* window, check_file_text* shader)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) 
@@ -209,4 +219,16 @@ void _gl_compile()
 
 
 
+}
+void __TEST__()
+{
+#ifdef _DEBUG
+
+    camera::test();
+    
+       
+ #endif
+#ifndef _DEBUG
+    cout << "netytestov" end;
+#endif //_DEBUG
 }

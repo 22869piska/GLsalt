@@ -17,7 +17,8 @@ using namespace std;
 class check_file_text {
 
 public:
-   unsigned int ZVO;
+    
+      unsigned int ZVO;
         unsigned int ID;
     // ------------------------------------------------------------------------
     check_file_text()

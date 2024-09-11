@@ -11,12 +11,13 @@ void texture::texture_bind()
 {
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture1);
+    /*
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, texture2);
     //
     glActiveTexture(GL_TEXTURE2);
     glBindTexture(GL_TEXTURE_2D, t_wall);
-
+    */
 }
 
 void texture::ALL_TEXTURE()
@@ -60,8 +61,8 @@ void texture::texture_billy_stronk()
 {
 
    // texture2;
-    glGenTextures(1, &texture2);
-    glBindTexture(GL_TEXTURE_2D, texture2);
+    glGenTextures(1, &texture1);
+    glBindTexture(GL_TEXTURE_2D, texture1);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);

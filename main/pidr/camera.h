@@ -7,12 +7,15 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <iostream>
+
+
 //-------------------------------------
- class mthlgc
+ class camera
 {
 public:
 	static bool test();
-
+	static void cam_fly(unsigned int id);
 
 
 private:
