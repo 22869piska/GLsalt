@@ -32,7 +32,7 @@ void resize(GLFWwindow* window, int width, int height);
 void windowinit__();
 void _in(GLFWwindow* window,check_file_text* shader);
 void _gl_compile();
-void _delete(); void __TEST__();
+void _delete(); void __TEST__(check_file_text * shader);
 //->--------------------------------------------------------------------------------------------------
 
 
@@ -50,27 +50,23 @@ int main()
     glfwSetFramebufferSizeCallback(window, resize);
    //
     check_file_text* shader=new check_file_text("main/shaders/vertex.shader", "main/shaders/fragment.shader");  _gl_compile();
-    texture *tex = new texture;
+    texture* tex = new texture; camera* cam = new camera; obj* obj_ = new obj;
     
     cout end <<"A=" << a end;
    
     //-------------------------------
-    tex->id = shader->GET_id();
+    tex->id = shader->GET_id(); obj_->id = shader->ID;
     shader->use();
-   // tex->ALL_TEXTURE();
-    tex->texture_1();
+   tex->ALL_TEXTURE();
+   
    
    //->
     glEnable(GL_DEPTH_TEST);
     
    //--------------------------------
-    glm::mat4 projection;
-    projection = glm::perspective(glm::radians(50.0f), 1600.f / 920.0f, 0.1f, 300.0f);
-    int projection_loc = glGetUniformLocation(shader->ID, "projection");
-    glUniformMatrix4fv(projection_loc, 1, GL_FALSE, glm::value_ptr(projection));
-    __TEST__();
+    __TEST__(shader);
     while (!glfwWindowShouldClose(window))
-    {//unput->
+    {//pidrput->
         
         _in(window,shader);
         //render->
@@ -79,26 +75,14 @@ int main()
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
        
 
-        camera::cam_fly(shader->ID);
+        cam->cam_fly(shader->ID);
 
         glBindVertexArray(VAO);
         tex->texture_bind();
 
      
-
-        for (unsigned int i = 0; i < 10; i++)
-        {
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, cubePositions[i]);
-            float angle = 20.0f * i;
-            model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-            shader->setMat4("model", model);
-
-            glDrawArrays(GL_TRIANGLES, 0, 36);
-        }
-
-
-       
+        //-->
+        obj_->box_van(tex); obj_->box_billy(tex);
          
 
         ///end//
@@ -108,8 +92,8 @@ int main()
 
     }//endwhile//
     //
-    delete shader;
-    delete tex;
+   // delete shader;
+    //delete tex;// delete cam;
     _delete();
     ///
     glfwTerminate();
@@ -227,7 +211,7 @@ void _gl_compile()
     //
 
 }
-void __TEST__()
+void __TEST__(check_file_text* shader)
 {
 #ifdef _DEBUG
 
@@ -238,4 +222,8 @@ void __TEST__()
 #ifndef _DEBUG
     cout << "netytestov" end;
 #endif //_DEBUG
+    glm::mat4 projection;
+    projection = glm::perspective(glm::radians(50.0f), 1600.f / 920.0f, 0.1f, 300.0f);
+    int projection_loc = glGetUniformLocation(shader->ID, "projection");
+    glUniformMatrix4fv(projection_loc, 1, GL_FALSE, glm::value_ptr(projection));
 }

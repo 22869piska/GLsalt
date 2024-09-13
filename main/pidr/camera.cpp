@@ -4,14 +4,17 @@
 //#include "main/public.h"
 #define end <<std::endl
 #define ret return
-
-
-
 bool camera::test()
 {
 	std::cout << "test_true" end;
 	ret true;
 }
+
+camera::~camera()
+{
+	;
+}
+
 //--------------------------------------------
 void camera::cam_fly(unsigned int id)
 {

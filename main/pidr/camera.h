@@ -14,8 +14,9 @@
  class camera
 {
 public:
+	~camera();
 	static bool test();
-	static void cam_fly(unsigned int id);
+	 void cam_fly(unsigned int id);
 
 
 private:

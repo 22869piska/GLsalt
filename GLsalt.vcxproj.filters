@@ -29,6 +29,9 @@
     <ClCompile Include="main\pidr\camera.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="main\pidr\OBJ.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="glfw3.dll" />
@@ -47,6 +50,7 @@
     <ClInclude Include="main\public.h" />
     <ClInclude Include="main\pidr\camera.h" />
     <ClInclude Include="main\headers.h" />
+    <ClInclude Include="main\pidr\OBJ.h" />
   </ItemGroup>
   <ItemGroup>
     <MASM Include="main\cumshot.asm">

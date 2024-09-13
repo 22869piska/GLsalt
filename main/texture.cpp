@@ -3,34 +3,39 @@
 #include <GLFW/stb_image.h>
 #include"texture.h"
 #define end <<std::endl
+
+//----------------------------------------------------------------------------
 texture::~texture()
 {
    
 }
+void texture::swap_tex()
+{
+  //  glUniform1i(glGetUniformLocation(id, "load_tex"), texture2);
+}
+/// --------------------
 void texture::texture_bind()
 {
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture1);
-    /*
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, texture2);
-    //
+    glBindTexture(GL_TEXTURE_2D, texture1);
+   // /*
     glActiveTexture(GL_TEXTURE2);
+    glBindTexture(GL_TEXTURE_2D, billy);
+    //
+    glActiveTexture(GL_TEXTURE3);
     glBindTexture(GL_TEXTURE_2D, t_wall);
-    */
+   // */
 }
-
 void texture::ALL_TEXTURE()
 {
     texture_1( );
     texture_billy_stronk( );
     texture_wall();
 }
-
-//texture->
-
+//texture->---------------------------------------------------------------------------------
 void texture::texture_1()
 {
+   
    // texture::texture1;
     glGenTextures(1, &texture1);
     glBindTexture(GL_TEXTURE_2D, texture1);
@@ -53,7 +58,7 @@ void texture::texture_1()
     {
         std::cout << "Failed to load texture" << std::endl;
     }
-  glUniform1i(glGetUniformLocation( id, "texture1"), 0);
+  //glUniform1i(glGetUniformLocation( id, "texture1"), 0);
     stbi_image_free(data);
 
 }
@@ -61,8 +66,8 @@ void texture::texture_billy_stronk()
 {
 
    // texture2;
-    glGenTextures(1, &texture1);
-    glBindTexture(GL_TEXTURE_2D, texture1);
+    glGenTextures(1, &billy);
+    glBindTexture(GL_TEXTURE_2D, billy);
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -85,7 +90,7 @@ void texture::texture_billy_stronk()
     {
         std::cout << "FAIL______________________ LOAD_TEXTURE_BILLY|STRONK" << std::endl;
     }
-    glUniform1i(glGetUniformLocation(id, "texture2"), 1);
+    //glUniform1i(glGetUniformLocation(id, ""), 1);
     stbi_image_free(data);
 }
 void texture::texture_wall()
@@ -112,7 +117,7 @@ void texture::texture_wall()
     {
         std::cout << "Failed to load wall" << std::endl;
     }
-    glUniform1i(glGetUniformLocation(id, "t_wall"), 2);
+  //  glUniform1i(glGetUniformLocation(id, "t_wall"), 0);
     stbi_image_free(data);
 
 }
